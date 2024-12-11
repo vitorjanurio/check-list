@@ -107,7 +107,24 @@ class Checklist:
 
         self.conexao.commit()
 
+    def listar_tabelas(self):
+        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tabelas = self.cursor.fetchall()
+        print("Tabelas no banco de dados:")
+        for tabela in tabelas:
+            print(tabela[0])
 
+        
+            
     def fechar_conexao(self):
-        self.conexao.close()     
+        self.conexao.close()
 
+
+
+
+
+
+if __name__ == "__main__":
+    db = Checklist("meu_banco_de_dados.db")
+    db.listar_tabelas()
+    db.fechar_conexao()
